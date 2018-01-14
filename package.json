@@ -1,0 +1,46 @@
+{
+  "name": "fox-sim",
+  "version": "0.0.1",
+  "description": "fox simulator",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack-dev-server --open",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crw-riviere/fox-sim.git"
+  },
+  "keywords": [
+    "fox",
+    "simulator"
+  ],
+  "author": "Charly Riviere",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crw-riviere/fox-sim/issues"
+  },
+  "homepage": "https://github.com/crw-riviere/fox-sim#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.0.0-beta.36",
+    "babel-loader": "^8.0.0-beta.0",
+    "paper": "^0.11.5",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "save-dev": "^2.0.0",
+    "webpack": "^3.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.36",
+    "@babel/preset-react": "^7.0.0-beta.36",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^22.0.4",
+    "clean-webpack-plugin": "^0.1.17",
+    "d3": "^4.12.2",
+    "html-webpack-plugin": "^2.30.1",
+    "jest": "^22.0.4",
+    "regenerator-runtime": "^0.11.1",
+    "webpack-dev-server": "^2.10.0"
+  }
+}

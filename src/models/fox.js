@@ -22,26 +22,35 @@ export default class Fox {
         this.movements.push({x,y});
     }
 
-    isDetectedEntity(){
+    getEntityInRadius(){
         for(var entity of this.otherEntities){
             const isClose = this.position.isClose(entity.position, this.radius);
             if(isClose){
                 this.detectedEntity = true;
-                return;
+                return entity;
             }
         }
-        
         this.detectedEntity = false;
-        
+        return null;
     }
 
     move() {
-        // this.randomMovement();
-        this.moveToDestination();
-
+        
+        let entity = this.getEntityInRadius();
+        if(!!entity)
+            this.flight(entity);
+        else
+            this.moveToDestination();
+        
+        
         this.position = this.moveWithinBoundaries(this.position);
         this.addMovement(this.position.x,this.position.y);
-        this.isDetectedEntity();
+    }
+
+    flight(entity){
+        let vector = entity.position.subtract(this.position)
+        vector.length = this.moveRange
+        this.position = this.position.subtract(vector)
     }
 
     moveToDestination(){

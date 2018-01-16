@@ -8,7 +8,12 @@ import Simulator from '../controllers/simulator.js'
 export default class Sim extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isSimulatorPaused:true, fpsInterval: 1000/60};
+        this.state = {
+            isSimulatorPaused:true, 
+            fpsInterval: 1000/60,
+            foxes:[],
+            rabbits:[]
+        };
         this.now = Date.now();
         this.then = Date.now();
         this.elapsed = 0;
@@ -20,6 +25,7 @@ export default class Sim extends React.Component {
 
         this.simulator = new Simulator(200, 200);
         this.simulator.setFoxCount(2);
+        this.simulator.setRabbitCount(2);
     }
 
     animate() {
@@ -36,7 +42,10 @@ export default class Sim extends React.Component {
 
             // Put your drawing code here
             this.simulator.simulateTurn();
-            this.setState({foxes:this.simulator.foxes});
+            this.setState({
+                foxes: this.simulator.foxes,
+                rabbits: this.simulator.rabbits
+            });
         }
     }
 
@@ -57,14 +66,16 @@ export default class Sim extends React.Component {
     }
 
     render() {
+        let entityList = this.state.foxes.concat(this.state.rabbits);
         return (
             <div>
                 <Map
                     height={this.simulator.boundaries.height}
                     width={this.simulator.boundaries.width}
                     foxes={this.state.foxes}
+                    rabbits={this.state.rabbits}
                 />
-                <EntityList foxes={this.state.foxes}/>
+                <EntityList entities={entityList}/>
                 <SimControls 
                     maxEntityCount={this.simulator.maxEntityCount}
                     onPlay={this.handlePlay}

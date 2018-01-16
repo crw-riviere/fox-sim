@@ -17,6 +17,12 @@ export default class Map extends React.Component {
         .enter()
         .append('g');
 
+        this.svg
+        .selectAll('g')
+        .data(foxes)
+        .exit()
+        .remove();
+
         // this.svg.selectAll('circle')
         // .data(foxes)
         // .enter()
@@ -42,7 +48,7 @@ export default class Map extends React.Component {
      .selectAll('circle.fox')
      .data(foxes)
      .attr('r', 5)
-     .style('fill', 'orange')
+     .style('fill', d => d.colour)
      .attr('cx', d => d.position.x)
      .attr('cy', d => d.position.y)
 

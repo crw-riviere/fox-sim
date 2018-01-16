@@ -1,9 +1,11 @@
 import Fox from '../models/fox.js';
+import Rabbit from '../models/rabbit.js';
 
 export default class Simulator {
-    constructor(height, width, foxes) {
+    constructor(height, width, foxes, rabbits) {
         this.boundaries = {height,width};
         this.foxes = foxes || [];
+        this.rabbits = rabbits || [];
     }
 
     get maxEntityCount(){
@@ -11,16 +13,21 @@ export default class Simulator {
     }
 
     addFox(x, y){
-        this.foxes.push(
-            // new Fox(
-            //     this.boundaries,
-            //     Math.floor(Math.random() * this.boundaries.height),
-            //     Math.floor(Math.random() * this.boundaries.width)
-            // )
+        this.foxes.push(           
             new Fox(
-                this.boundaries,
                 this.boundaries.height / 2,
                 this.boundaries.width / 2,
+                this.boundaries,
+                this.foxes
+            ));
+    }
+
+    addRabbit(x, y){
+        this.foxes.push(           
+            new Rabbit(
+                this.boundaries.height / 2,
+                this.boundaries.width / 2,
+                this.boundaries,
                 this.foxes
             ));
     }
@@ -34,6 +41,19 @@ export default class Simulator {
             let additionalCount = count - this.foxes.length;
             for(let i = 0; i < additionalCount; i++){
                 this.addFox();
+            }
+        }
+    }
+
+    setRabbitCount(count){
+        if(count < this.rabbits.length){
+             this.rabbits = this.rabbits.slice(0, count);
+        }
+
+        if(count > this.rabbits.length){
+            let additionalCount = count - this.rabbits.length;
+            for(let i = 0; i < additionalCount; i++){
+                this.addRabbit();
             }
         }
     }
